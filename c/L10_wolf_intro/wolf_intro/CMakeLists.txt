@@ -5,12 +5,16 @@ project(qt_hello LANGUAGES C)
 # Set relative path to the wolfSSL sources
 set(WOLFCRYPT_SRC_PATH ../../wolfssl-5.6.6/wolfcrypt/src)
 
+# Add compile definitions
+add_compile_definitions(WOLFCRYPT_ONLY) # Only WolfCrypt compiled
+
 include_directories("../../common")
 include_directories("../../wolfssl-5.6.6") # Check your version of wolfssl
 
 add_executable(qt_hello
                main.c
                ../../common/shared_functions.c
+               ${WOLFCRYPT_SRC_PATH}/asn.c
                ${WOLFCRYPT_SRC_PATH}/wc_port.c
                ${WOLFCRYPT_SRC_PATH}/aes.c
                ${WOLFCRYPT_SRC_PATH}/coding.c
@@ -24,6 +28,7 @@ add_executable(qt_hello
                ${WOLFCRYPT_SRC_PATH}/sha.c
                ${WOLFCRYPT_SRC_PATH}/sha256.c
                ${WOLFCRYPT_SRC_PATH}/wc_encrypt.c
+               ${WOLFCRYPT_SRC_PATH}/rsa.c
                ${WOLFCRYPT_SRC_PATH}/dsa.c
                ${WOLFCRYPT_SRC_PATH}/random.c
            )
