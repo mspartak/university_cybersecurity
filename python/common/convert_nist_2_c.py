@@ -16,3 +16,13 @@ c_pt = utils.MakeCArray(PLAINTEXT)
 print(f"plaintext ... {c_pt};")
 c_ct = utils.MakeCArray(CIPHERTEXT)
 print(f"ciphertext ... {c_ct};")
+
+
+
+Msg = "74cb9381d89f5aa73368"
+MD = "73d6fad1caaa75b43b21733561fd3958bdc555194a037c2addec19dc2d7a52bd"
+
+c_hash_msg = utils.MakeCArray(Msg)
+print(f"Nist_Msg ... {c_hash_msg};")
+c_hash_md = utils.MakeCArray(MD)
+print(f"Nist_Digest ... {c_hash_md};")
