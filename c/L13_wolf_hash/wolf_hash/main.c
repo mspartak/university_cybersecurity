@@ -93,10 +93,10 @@ void CheckHashAgainstPython()
     word32 message_len;
 
     /* Load message from binary file */
-    message_len = ReadBinaryFile("message.dat", message);
+    message_len = ReadBinaryFile("../message.dat", message);
 
     /* Load hash from binary file */
-    ReadBinaryFile("message_hash.dat", received_hash);
+    ReadBinaryFile("../message_hash.dat", received_hash);
 
     /* Initialize SHA structure first */
     ret = wc_InitSha256(&sha_struct);
