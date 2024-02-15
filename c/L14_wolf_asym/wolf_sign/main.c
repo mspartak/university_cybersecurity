@@ -36,7 +36,7 @@ int signature_size;
 char message[] = "Be yourself; everyone else is already taken.";  /* ― Oscar Wilde */
 
 /* Generate RSA keys pair. */
-int ReadRsaKeyFromDerFile(void)
+int GenerateRsaKeyPair(void)
 {
     int err = 0;
     word32 w32 = 0;
@@ -186,7 +186,7 @@ int main()
     }
 
     printf("======== Generate RSA Keys ======== \n");
-    ret = ReadRsaKeyFromDerFile();
+    ret = GenerateRsaKeyPair();
     if (ret != 0)
     {
         return 0;
