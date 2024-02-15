@@ -111,7 +111,7 @@ void EncryptMessage()
         sizeof(message),
         ciphertext,
         sizeof(ciphertext),
-        &private_key,
+        &public_key,
         &rng_obj
         );
 
