@@ -11,7 +11,7 @@ Len = 32
 Msg = '549e959e'
 MD = 'b78bae6d14338ffccfd5d5b5674a275f6ef9c717'
 
-# Define test to be hashed and make its encoding to UTF-8
+# Convert message to bytes array
 message = bytes.fromhex(Msg)
 
 # Calculate SHA-1 using single update

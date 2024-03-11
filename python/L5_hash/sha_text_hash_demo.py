@@ -1,7 +1,7 @@
 from cryptography.hazmat.primitives import hashes
 import common.utils as utils
 
-# Define test to be hashed and make its encoding to UTF-8
+# Define text to be hashed and make its encoding to UTF-8
 message = "Let the cat out of the bag"
 message_as_bytes = message.encode("utf-8")
 
