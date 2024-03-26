@@ -99,6 +99,7 @@ def RsaGenerateKeys(bitsize, file_prefix):
     )
     file_object = open(f'{file_prefix}_public_key.pem', 'wb')
     file_object.write(pem)
+    file_object.close()
 
     # Store Public Key as DER:
     der = rsa_public_key_obj.public_bytes(
@@ -107,6 +108,7 @@ def RsaGenerateKeys(bitsize, file_prefix):
     )
     file_object = open(f'{file_prefix}_public_key.der', 'wb')
     file_object.write(der)
+    file_object.close()
 
     pr_numbers = rsa_private_key_obj.private_numbers()
 
