@@ -139,7 +139,7 @@ void DecryptMessage()
         &private_key
         );
 
-    if (ciphertext_size >= 0)
+    if (ret >= 0)
     {
         printf("Decrypted message using private key: \n");
         printf("%s", (char *) plaintext);
@@ -156,7 +156,7 @@ int main()
 {
     printf("Hello World!\n");
 
-    if (wolfCrypt_Init() != 0) {
+    if ((ret = wolfCrypt_Init()) != 0) {
         printf("wolfCrypt_Init failed %d\n", (int)ret);
     }
 
