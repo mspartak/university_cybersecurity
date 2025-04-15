@@ -7,7 +7,7 @@
 #include <wolfssl/wolfcrypt/asn.h>
 
 #define BUFFER_SIZE (1024)
-#define DER_FILE_BUFFER (1024)
+#define DER_FILE_BUFFER (2048)
 
 WC_RNG rng;
 int    ret;     /* returned value */
@@ -49,6 +49,7 @@ void ReadRsaKeyFromDerFile(void)
     if ( ret != 0 )
     {
         printf("ERROR in private key decoding!\n");
+        return;
     }
 
     rsa_key_size = wc_RsaEncryptSize(&private_key);
@@ -70,6 +71,7 @@ void ReadRsaKeyFromDerFile(void)
     if ( ret != 0 )
     {
         printf("ERROR in public key decoding!\n");
+        return;
     }
 
     eSz = rsa_key_size;
@@ -84,6 +86,7 @@ void ReadRsaKeyFromDerFile(void)
     if ( ret != 0 )
     {
         printf("ERROR in wc_RsaFlattenPublicKey!\n");
+        return;
     }
 
     printf("Public exponent: \n");
@@ -99,12 +102,13 @@ void GenerateRsaKeys(void)
     word32 eSz;
     word32 nSz;
     long pubic_exponent = 65537; // standard public exponent
-    const int rsa_key_bit_size = 512; // desired key length, in bits
+    const int rsa_key_bit_size = 2048; // desired key length, in bits. Must be bigger than RSA_MIN_SIZE
     const int rsa_key_byte_size = rsa_key_bit_size / 8; // desired key length, in bytes
 
     if (wc_InitRng(&rng))
     {
-        printf("Error during random number generator initialization\n");
+        printf("Error during random number generator initialization\n");        
+        return;
     }
 
     /* Generate RSA Keys */
@@ -116,7 +120,8 @@ void GenerateRsaKeys(void)
         );
     if ( ret != 0 )
     {
-        printf("ERROR in wc_MakeRsaKey!\n");
+        printf("ERROR in wc_MakeRsaKey! Error ID %d \n", ret);
+        return;
     }
     else
     {
@@ -131,11 +136,12 @@ void GenerateRsaKeys(void)
         );
     if ( ret < 0 )
     {
-        printf("ERROR in wc_RsaKeyToDer! %d\n", ret);
+        printf("ERROR in wc_RsaKeyToDer! Error ID %d\n", ret);
+        return;
     }
     else
     {
-        printf("RSA Key converted to DER. Bytes in DER: %d \n", ret);
+        printf("RSA Private Key converted to DER. Bytes in DER: %d \n", ret);
     }
 
     WriteBinaryFile("wolf_private_key.der",
@@ -155,6 +161,7 @@ void GenerateRsaKeys(void)
     if ( ret != 0 )
     {
         printf("ERROR in wc_RsaFlattenPublicKey!\n");
+        return;
     }
 
     printf("Public exponent: \n");
@@ -171,10 +178,11 @@ void GenerateRsaKeys(void)
     if ( ret < 0 )
     {
         printf("ERROR in wc_RsaKeyToDer! %d\n", ret);
+        return;
     }
     else
     {
-        printf("RSA Key converted to DER. Bytes in DER: %d\n", ret);
+        printf("RSA Public Key converted to DER. Bytes in DER: %d\n", ret);
     }
 
     WriteBinaryFile("wolf_public_key.der",
@@ -184,6 +192,7 @@ void GenerateRsaKeys(void)
     if (wc_FreeRng(&rng))
     {
         printf("Error during random number generator deinitialization");
+        return;
     }
 }
 
@@ -206,6 +215,8 @@ int main()
     }
 
     printf("completed\n");
+
+    fflush(stdout); /* Ensure that everything printed to the terminal before exit. */
 
     return 0;
 }
