@@ -3,13 +3,14 @@ cmake_minimum_required(VERSION 3.5)
 project(qt_hello LANGUAGES C)
 
 # Set relative path to the wolfSSL sources
-set(WOLFCRYPT_SRC_PATH ../../wolfssl-5.6.6/wolfcrypt/src)
+set(WOLFCRYPT_SRC_PATH ../../wolfssl-5.7.6/wolfcrypt/src)
 
 # Add compile definitions
 add_compile_definitions(WOLFCRYPT_ONLY) # Only WolfCrypt compiled
+add_compile_definitions(WOLFSSL_NO_OPTIONS_H) # To avoid warning that custom configuration missed
 
 include_directories("../../common")
-include_directories("../../wolfssl-5.6.6") # Check your version of wolfssl
+include_directories("../../wolfssl-5.7.6") # Check your version of wolfssl
 
 add_executable(qt_hello
                main.c
