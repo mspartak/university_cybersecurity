@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include "shared_functions.h"
-#include <wolfssl/wolfcrypt/types.h>
-#include <wolfssl/wolfcrypt/wc_port.h>
 #include <wolfssl/wolfcrypt/random.h>
 
 #define RAND_NUMBER_BYTE_SIZE (8)
@@ -17,6 +15,7 @@ int main()
 
     if ((ret = wolfCrypt_Init()) != 0) {
         printf("wolfCrypt_Init failed %d\n", (int)ret);
+        return 1;
     }
 
     ret = wc_InitRng(
@@ -25,6 +24,7 @@ int main()
 
     if (0 != ret) {
         printf("Error during random number generator initialization\n");
+        return 1;
     }
     else {
         printf("Random number generator initialized\n");
@@ -38,6 +38,7 @@ int main()
 
     if (0 != ret) {
         printf("Error during random number generation\n");
+        return 1;
     }
     else {
         printf("Generated: ");
@@ -47,6 +48,7 @@ int main()
     ret = wc_FreeRng(&my_rand);
     if (0 != ret) {
         printf("Error during random number generator deinitialization");
+        return 1;
     }
 
     if ((ret = wolfCrypt_Cleanup()) != 0) {
