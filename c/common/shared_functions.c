@@ -38,7 +38,7 @@ size_t ReadBinaryFile(const char * filename,
     size_t read_bytes_count = 0;
     FILE* in_file = fopen(filename, "rb");
     if (!in_file) {
-        printf("ERROR: can not open binary file\n");
+        printf("ERROR: can not open binary file %s \n", filename);
         exit(EXIT_FAILURE);
     }
     /* Determine number of bytes in file */
