@@ -202,6 +202,7 @@ int main()
 
     if ((ret = wolfCrypt_Init()) != 0) {
         printf("wolfCrypt_Init failed %d\n", (int)ret);
+        return 1;
     }
 
     printf("======== Read Existing RSA Keys ======== \n");
@@ -212,6 +213,7 @@ int main()
 
     if ((ret = wolfCrypt_Cleanup()) != 0) {
         printf("wolfCrypt_Cleanup failed %d\n", (int)ret);
+        return 1;
     }
 
     printf("completed\n");
