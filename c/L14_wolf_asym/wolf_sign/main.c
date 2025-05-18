@@ -11,7 +11,7 @@
 #define SIGNATURE_BUFFER_SIZE (1024)
 #define HASH_BUFFER_SIZE      (512)
 #define OUTPUT_BUFFER_SIZE    (1024)
-#define RSA_KEY_SIZE          (1024)
+#define RSA_KEY_SIZE          (2048)
 
 int    ret;     /* returned value */
 
@@ -54,7 +54,7 @@ int GenerateRsaKeyPair(void)
     ret = wc_MakeRsaKey(&private_key, RSA_KEY_SIZE, WC_RSA_EXPONENT, &rng_obj);
     if (ret != 0)
     {
-        printf("ERROR: MakeRsaKey error.\n");
+        printf("ERROR: MakeRsaKey error %d.\n", ret);
         err = 2;
         return err;
     }
