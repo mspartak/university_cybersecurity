@@ -47,7 +47,7 @@ void ReadRsaKeyFromDerFile(void)
     /* -------- Read private key -------- */
     /* ---------------------------------- */
 
-    bytes_count = ReadBinaryFile("../demo_private_key.der", der_file_content);
+    bytes_count = ReadBinaryFile("../../../demo_private_key.der", der_file_content);
 
     /* Convert serialized RSA key to RSA key structure */
     w32 = 0;
@@ -69,7 +69,7 @@ void ReadRsaKeyFromDerFile(void)
     /* ---------------------------------- */
 
     /* Read public key */
-    bytes_count = ReadBinaryFile("../demo_public_key.der", der_file_content);
+    bytes_count = ReadBinaryFile("../../../demo_public_key.der", der_file_content);
 
     w32 = 0;
     ret = wc_RsaPublicKeyDecode(
