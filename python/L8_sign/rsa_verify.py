@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives.asymmetric import padding
 import common.utils as utils
 
 # Load RSA public key
-_ , rsa_public_key_obj = utils.RsaLoadKeys("DER", "rsakey")
+rsa_public_key_obj = utils.RsaLoadPublicKey("DER", "rsakey")
 
 # Load signature from binary file
 signature = utils.ReadBinaryFile("signature.sign")

@@ -123,13 +123,13 @@ def RsaGenerateKeys(bitsize, file_prefix):
 
     return rsa_private_key_obj, rsa_public_key_obj
 
-# Extracts RSA keys from PEM or DER file.
-# Filenames: <file_prefix>_private_key.pem(der) or <file_prefix>_public_key.pem(der)
+# Extracts RSA private key from PEM or DER file.
+# Filenames: <file_prefix>_private_key.pem(der)
 # Parameters:
 #        filetype - EncodingType type is "PEM" or "DER"
 #        file_prefix - file name prefix
-# Returns RSA Private Key object and RSA Public Key object
-def RsaLoadKeys(filetype, file_prefix):
+# Returns RSA Private Key object
+def RsaLoadPrivateKey(filetype, file_prefix):
     print("Loading existing RSA keys...")
     if ("PEM" == filetype):
         private_key_filename = f'{file_prefix}_private_key.pem'
@@ -139,11 +139,6 @@ def RsaLoadKeys(filetype, file_prefix):
         file_content = file_object.read()
         rsa_private_key_obj = serialization.load_pem_private_key(file_content, None)
         file_object.close()
-        # Load public key in PEM format
-        file_object = open(public_key_filename, 'rb')
-        file_content = file_object.read()
-        rsa_public_key_obj = serialization.load_pem_public_key(file_content, None)
-        file_object.close()
     elif ("DER" == filetype):
         private_key_filename = f'{file_prefix}_private_key.der'
         public_key_filename = f'{file_prefix}_public_key.der'
@@ -152,6 +147,28 @@ def RsaLoadKeys(filetype, file_prefix):
         file_content = file_object.read()
         rsa_private_key_obj = serialization.load_der_private_key(file_content, None)
         file_object.close()
+    else:
+        raise Exception("FileType parameter is wrong.")
+
+    return rsa_private_key_obj
+
+# Extracts RSA public key from PEM or DER file.
+# Filenames: <file_prefix>_public_key.pem(der)
+# Parameters:
+#        filetype - EncodingType type is "PEM" or "DER"
+#        file_prefix - file name prefix
+# Returns RSA Public Key object
+def RsaLoadPublicKey(filetype, file_prefix):
+    print("Loading existing RSA keys...")
+    if ("PEM" == filetype):
+        public_key_filename = f'{file_prefix}_public_key.pem'
+        # Load public key in PEM format
+        file_object = open(public_key_filename, 'rb')
+        file_content = file_object.read()
+        rsa_public_key_obj = serialization.load_pem_public_key(file_content, None)
+        file_object.close()
+    elif ("DER" == filetype):
+        public_key_filename = f'{file_prefix}_public_key.der'
         # Load public key in DER format
         file_object = open(public_key_filename, 'rb')
         file_content = file_object.read()
@@ -160,4 +177,4 @@ def RsaLoadKeys(filetype, file_prefix):
     else:
         raise Exception("FileType parameter is wrong.")
 
-    return rsa_private_key_obj, rsa_public_key_obj
+    return rsa_public_key_obj

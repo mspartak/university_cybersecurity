@@ -1,7 +1,7 @@
 from cryptography.hazmat.primitives.asymmetric import padding
 import common.utils as utils
 
-rsa_private_key_obj, rsa_public_key_obj = utils.RsaLoadKeys("DER", "demo")
+rsa_private_key_obj = utils.RsaLoadPrivateKey("DER", "demo")
 
 encrypted_message =  utils.ReadBinaryFile('encrypted_message.dat')
 

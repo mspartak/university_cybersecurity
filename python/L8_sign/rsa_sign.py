@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives.asymmetric import padding
 import common.utils as utils
 
 # Load RSA private key
-rsa_private_key_obj, _ = utils.RsaLoadKeys("DER", "rsakey")
+rsa_private_key_obj = utils.RsaLoadPrivateKey("DER", "rsakey")
 
 # Create message to be signed
 message = "You have to pay 100 dollars to the account: 12131415"
