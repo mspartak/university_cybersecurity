@@ -133,7 +133,6 @@ def RsaLoadPrivateKey(filetype, file_prefix):
     print("Loading existing RSA keys...")
     if ("PEM" == filetype):
         private_key_filename = f'{file_prefix}_private_key.pem'
-        public_key_filename = f'{file_prefix}_public_key.pem'
         file_object = open(private_key_filename, 'rb')
         # Load private key in PEM format
         file_content = file_object.read()
@@ -141,7 +140,6 @@ def RsaLoadPrivateKey(filetype, file_prefix):
         file_object.close()
     elif ("DER" == filetype):
         private_key_filename = f'{file_prefix}_private_key.der'
-        public_key_filename = f'{file_prefix}_public_key.der'
         file_object = open(private_key_filename, 'rb')
         # Load private key in DER format
         file_content = file_object.read()
