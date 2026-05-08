@@ -211,7 +211,7 @@ int main()
     ret = Verify();
     if (ret != 0)
     {
-        return 0;
+        printf("Verification failed, becaise bit flip injected.\n");
     }
 
     if ((ret = wolfCrypt_Cleanup()) != 0) {
